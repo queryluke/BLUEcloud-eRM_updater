@@ -1,8 +1,8 @@
 #!/usr/local/bin/php
 <?php
 
-include_once 'config.php';
-include_once 'helpers.php';
+require_once __DIR__.'/config.php';
+require_once __DIR__.'/helpers.php';
 
 $from_version = '2.0.0';
 $to_version = '3.0.0';
@@ -14,7 +14,7 @@ chdir($coral_path);
 // remove any untracked files
 exec('git clean -df');
 // remove any changes
-exec('git checkout .'); 
+exec('git checkout .');
 // get the latest repo changes
 exec('git fetch');
 exec('git checkout master');
