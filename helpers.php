@@ -59,14 +59,14 @@ function safefilerewrite($fileName, $dataToSave)
 
 function process_sql_files($module) {
     global $coral_path;
-    global $mysql_pass;
-    global $mysql_user;
-    global $mysql_host;
     global $from_version;
     global $to_version;
 
     $config = get_ini_file($module);
     $db_name = $config['database']['name'];
+    $mysql_user = $config['database']['username'];
+    $mysql_pass = $config['database']['password'];
+    $mysql_host = $config['database']['host'];
     $sql_dir = "$coral_path/$module/install/protected";
     $sql_files_to_process = [];
 
@@ -94,4 +94,8 @@ function process_sql_files($module) {
         shell_exec($command);
     }
 
+}
+
+function replace_string_in_file($file, $from, $to) {
+    file_put_contents($file, str_replace($from, $to, file_get_contents($file)));
 }
