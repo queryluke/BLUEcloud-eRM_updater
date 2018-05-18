@@ -16,8 +16,8 @@ exec('git clean -df');
 // remove any changes
 exec('git checkout .');
 // get the latest repo changes
-exec('git fetch');
 exec('git checkout master');
+exec('git pull');
 
 // Create the common config file
 $fp = "$coral_path/common/configuration_sample.ini";
