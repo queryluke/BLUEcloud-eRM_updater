@@ -27,8 +27,8 @@ $config = parse_ini_file($fp, true);
 $resources_fp = "$coral_path/resources/admin/configuration.ini";
 $resources_config = parse_ini_file($resources_fp, true);
 $config['installation_details']['version'] = $to_version;
-$config['database']['username'] = $update_user;
-$config['database']['password'] = $update_pass;
+$config['database']['username'] = $resources_config['database']['username'];
+$config['database']['password'] = $resources_config['database']['password'];
 $config['database']['host'] = $resources_config['database']['host'];
 write_php_ini($write_fp, $config);
 
