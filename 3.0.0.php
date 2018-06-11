@@ -51,17 +51,30 @@ foreach($modules as $m) {
     }
 }
 
-
 // Module specific updates
 function update_resources(){
     $fp = ini_file('resources');
     $config = get_ini_file('resources');
-    if (empty($config["settings"]))
+    if (empty($config["settings"])) {
         $config["settings"] = [];
+    }
     // Populate the variable with a value
     // Warning: do not set $conf_data["general"] = ["random" => "something"] or you will lose other variables. Rather:
     $config["settings"]["ebscoKbEnabled"] = "N";
     $config["settings"]["ebscoKbCustomerId"] = "";
     $config["settings"]["ebscoKbApiKey"] = "";
+    write_php_ini($fp, $config);
+}
+
+// Module specific updates
+function update_usage(){
+    $fp = ini_file('usage');
+    $config = get_ini_file('usage');
+    if (empty($config["settings"])){
+        $config["settings"] = [];
+    }
+    // Populate the variable with a value
+    // Warning: do not set $conf_data["general"] = ["random" => "something"] or you will lose other variables. Rather:
+    $config["settings"]["reportsModule"] = "Y";
     write_php_ini($fp, $config);
 }
