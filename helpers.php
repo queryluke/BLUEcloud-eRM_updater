@@ -61,11 +61,13 @@ function process_sql_files($module) {
     global $coral_path;
     global $from_version;
     global $to_version;
+    global $update_user;
+    global $update_pass;
 
     $config = get_ini_file($module);
     $db_name = $config['database']['name'];
-    $mysql_user = $config['database']['username'];
-    $mysql_pass = $config['database']['password'];
+    $mysql_user = $update_user;
+    $mysql_pass = $update_pass;
     $mysql_host = $config['database']['host'];
     $sql_dir = "$coral_path/$module/install/protected";
     $sql_files_to_process = [];
