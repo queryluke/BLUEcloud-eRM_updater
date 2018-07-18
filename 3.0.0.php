@@ -9,6 +9,9 @@ $to_version = '3.0.0';
 
 $modules = ['auth','licensing','management','organizations','resources','usage'];
 
+echo "Starting update\n";
+echo "Updating Coral source code\n";
+
 // Clean up git
 chdir($coral_path);
 // remove any untracked files
@@ -19,6 +22,9 @@ exec('git checkout .');
 exec('git checkout master');
 exec('git pull');
 
+echo "Coral source code updated\n";
+
+echo "Creating core configuration file\n";
 // Create the common config file
 $fp = "$coral_path/common/configuration_sample.ini";
 $write_fp = "$coral_path/common/configuration.ini";
@@ -34,7 +40,11 @@ write_php_ini($write_fp, $config);
 
 $common_fp = ini_file('common');
 $common_config = get_ini_file('common');
+echo "Core configuration file created\n";
+
 foreach($modules as $m) {
+    $mod_name = ucfirst($mod_name);
+    echo "Starting $mod_name updates\n";
     if ($common_config[$m]['installed'] !== 'Y') {
         continue;
     }
@@ -49,7 +59,11 @@ foreach($modules as $m) {
     if($m !== 'auth') {
         replace_string_in_file("$coral_path/$m/templates/header.php",$coral_docs_url,$sirsi_docs_url);
     }
+    echo "$mod_name updates complete\n";
 }
+
+echo "Cora successfully updated\n";
+
 
 // Module specific updates
 function update_resources(){
