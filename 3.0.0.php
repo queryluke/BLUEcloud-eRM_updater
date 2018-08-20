@@ -42,6 +42,15 @@ $common_fp = ini_file('common');
 $common_config = get_ini_file('common');
 echo "Core configuration file created\n";
 
+// Reports Hotfix
+foreach ([['/reports/admin/classes/domain/ParameterFactory.php', 17], ['/reports/admin/classes/report/Report.php', 39]] as $file) {
+    $filename = $coral_path . $file[0];
+    $lines = file( $filename , FILE_IGNORE_NEW_LINES );
+    $lines[$file[1]] = $lines[$file[1]].'->selectDB(Config::$database->name)';
+    file_put_contents( $filename , implode( "\n", $lines ) );
+}
+
+
 foreach($modules as $m) {
     $mod_name = ucfirst($mod_name);
     echo "Starting $mod_name updates\n";
@@ -62,7 +71,7 @@ foreach($modules as $m) {
     echo "$mod_name updates complete\n";
 }
 
-echo "Cora successfully updated\n";
+echo "Coral successfully updated\n";
 
 
 // Module specific updates
