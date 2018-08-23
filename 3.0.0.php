@@ -50,6 +50,13 @@ foreach ([['/reports/admin/classes/domain/ParameterFactory.php', 17], ['/reports
     file_put_contents( $filename , implode( "\n", $lines ) );
 }
 
+// EbscoKB title Search hotfix
+
+$filename = $coral_path . '/resources/ajax_htmldata/getEbscoKbTitleDetails.php';
+$lines = file( $filename , FILE_IGNORE_NEW_LINES );
+$lines[95] = str_replace('echo_','echo _', $lines[95]);
+file_put_contents( $filename , implode( "\n", $lines ) );
+
 
 foreach($modules as $m) {
     $mod_name = ucfirst($mod_name);
