@@ -15,6 +15,7 @@ exec('git clean -df');
 exec('git checkout .');
 // get the latest repo changes
 exec('git checkout master');
+exec('git fetch');
 exec('git pull origin master');
 
 foreach($modules as $m) {
