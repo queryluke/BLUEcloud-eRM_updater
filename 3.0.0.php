@@ -59,7 +59,7 @@ file_put_contents( $filename , implode( "\n", $lines ) );
 
 
 foreach($modules as $m) {
-    $mod_name = ucfirst($mod_name);
+    $mod_name = ucfirst($m);
     echo "Starting $mod_name updates\n";
     if ($common_config[$m]['installed'] !== 'Y') {
         continue;
