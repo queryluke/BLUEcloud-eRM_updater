@@ -13,10 +13,14 @@ chdir($coral_path);
 exec('git clean -df');
 // remove any changes
 exec('git checkout .');
+echo "Cleaned Coral Code\n";
 // get the latest repo changes
 exec('git checkout master');
+echo "Master checked out\n";
 exec('git fetch');
+echo "upstream fetched\n";
 exec('git pull origin master');
+echo "master changes merged\n";
 
 foreach($modules as $m) {
     $mod_name = ucfirst($m);
