@@ -18,7 +18,7 @@ exec('git checkout master');
 exec('git pull origin master');
 
 foreach($modules as $m) {
-    $mod_name = ucfirst($mod_name);
+    $mod_name = ucfirst($m);
     echo "Starting $mod_name updates\n";
     if($m !== 'auth') {
         replace_string_in_file("$coral_path/$m/templates/header.php",$coral_docs_url,$sirsi_docs_url);
