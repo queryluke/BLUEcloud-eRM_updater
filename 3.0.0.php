@@ -20,7 +20,8 @@ exec('git clean -df');
 exec('git checkout .');
 // get the latest repo changes
 exec('git checkout master');
-exec('git pull');
+exec('git fetch');
+exec('git pull origin master');
 
 echo "Coral source code updated\n";
 
