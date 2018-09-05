@@ -79,6 +79,16 @@ foreach($modules as $m) {
     echo "$mod_name updates complete\n";
 }
 
+// 2.0.0 DB hotfix
+$config = get_ini_file('resources');
+$mysql_user = $update_user;
+$mysql_pass = $update_pass;
+$mysql_host = $config['database']['host'];
+$sql_file = __DIR__.'/2.0.0_update.sql';
+$command = "mysql -u{$mysql_user} -p{$mysql_pass} "
+            . "-h {$mysql_host} < {$sql_file}";
+shell_exec($command);
+
 echo "Coral successfully updated\n";
 
 
