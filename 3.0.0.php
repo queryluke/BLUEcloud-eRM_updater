@@ -47,7 +47,9 @@ echo "Core configuration file created\n";
 foreach ([['/reports/admin/classes/domain/ParameterFactory.php', 17], ['/reports/admin/classes/report/Report.php', 39]] as $file) {
     $filename = $coral_path . $file[0];
     $lines = file( $filename , FILE_IGNORE_NEW_LINES );
-    $lines[$file[1]] = $lines[$file[1]].'->selectDB(Config::$database->name)';
+    if(strpos($lines[$file[1]], '->selectDB(Config::$database->name)') === false){
+        $lines[$file[1]] = $lines[$file[1]].'->selectDB(Config::$database->name)';
+    }
     file_put_contents( $filename , implode( "\n", $lines ) );
 }
 
