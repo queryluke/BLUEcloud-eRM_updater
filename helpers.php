@@ -7,6 +7,15 @@ function update_version($to_version) {
     write_php_ini($fp, $config);
 }
 
+function clean_untracked_files() {
+    global $coral_path;
+    chdir($coral_path);
+    // remove any untracked files
+    exec('git clean -df');
+    // remove any changes
+    exec('git checkout .');
+}
+
 function ini_file($module) {
     global $coral_path;
     return $module == 'common' ? "$coral_path/$module/configuration.ini" : "$coral_path/$module/admin/configuration.ini";
@@ -100,4 +109,9 @@ function process_sql_files($module) {
 
 function replace_string_in_file($file, $from, $to) {
     file_put_contents($file, str_replace($from, $to, file_get_contents($file)));
+}
+
+function update_footer_version($from, $to) {
+    global $coral_path;
+    replace_string_in_file("$coral_path/templates/footer.php", $from, $to);
 }
