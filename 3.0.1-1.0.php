@@ -28,24 +28,22 @@ echo "Coral source code updated\n";
 echo "Creating core configuration file\n";
 
 
-// TODO: Might need an arg for date format
-// Create the common config file
-$fp = "$coral_path/common/configuration.ini";
-fopen($fp, "w");
-$config = parse_ini_file($fp, true);
+// Update the common config file
+$fp = ini_file('common');
+$config = get_ini_file('common');
 $config['installation_details']['version'] = $to_version;
-$config['settings']['datepicker_date_format'] = "dd/mm/yyyy";
+$config['settings']['environment'] = 'prod';
+$config['settings']['date_format'] = '%m/%d/%Y';
+$config['settings']['datepicker_date_format'] = "mm/dd/yyyy";
 write_php_ini($fp, $config);
 
-$common_fp = ini_file('common');
-$common_config = get_ini_file('common');
 echo "Core configuration file created\n";
 
 
 foreach($modules as $m) {
     $mod_name = ucfirst($m);
     echo "Starting $mod_name updates\n";
-    if ($common_config[$m]['installed'] !== 'Y') {
+    if ($config[$m]['installed'] !== 'Y') {
         continue;
     }
 
