@@ -61,6 +61,7 @@ foreach($modules as $m) {
 
 // update version in footer
 update_footer_version('DEVELOPMENT', '3.0.1 (SirsiDynix 1.0)');
+update_footer_version('3.0.0', '3.0.1 (SirsiDynix 1.0)');
 
 echo "Coral successfully updated\n";
 
