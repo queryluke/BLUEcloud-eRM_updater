@@ -41,13 +41,19 @@ echo "Core configuration file created\n";
 
 
 foreach($modules as $m) {
+    $omissions = array(
+        'resources' => array(
+            '001-470.sql'
+        ),
+    );
+
     $mod_name = ucfirst($m);
     echo "Starting $mod_name updates\n";
     if ($config[$m]['installed'] !== 'Y') {
         continue;
     }
 
-    process_sql_files($m);
+    process_sql_files($m, $omissions);
     $additional_updates = "update_$m";
 
     if (function_exists($additional_updates)){

@@ -66,7 +66,7 @@ function safefilerewrite($fileName, $dataToSave)
     }
 }
 
-function process_sql_files($module) {
+function process_sql_files($module, $omissions) {
     global $coral_path;
     global $from_version;
     global $to_version;
@@ -99,6 +99,10 @@ function process_sql_files($module) {
 
     foreach ($final_sql_files as $sql_file)
     {
+        $basename = basename($sql_file);
+        if ($omissions && $omissions[$module] && in_array($basename,$omissions[$module])) {
+            $sql_file = __DIR__ . "/sql_replacements/$module/$to_version/$basename";
+        }
         $command = "mysql -u{$mysql_user} -p{$mysql_pass} "
             . "-h {$mysql_host} -D {$db_name} < {$sql_file}";
 
