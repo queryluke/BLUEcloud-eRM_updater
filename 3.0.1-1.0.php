@@ -22,7 +22,6 @@ exec('git remote add origin https://github.com/Sirsidynix/coral.git');
 // update code
 exec('git fetch');
 exec('git pull origin master');
-exec('git checkout sirsi-3.0.1-1.0');
 
 echo "Coral source code updated\n";
 
