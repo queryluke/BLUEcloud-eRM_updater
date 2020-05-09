@@ -111,6 +111,22 @@ function process_sql_files($module, $omissions) {
 
 }
 
+function process_sql_file($module, $version, $file) {
+    global $coral_path;
+    global $update_user;
+    global $update_pass;
+
+    $config = get_ini_file($module);
+    $db_name = $config['database']['name'];
+    $mysql_user = $update_user;
+    $mysql_pass = $update_pass;
+    $mysql_host = $config['database']['host'];
+    $sql_file_to_process = "$coral_path/$module/install/protected/$version/$file";
+    $command = "mysql -u{$mysql_user} -p{$mysql_pass} "
+        . "-h {$mysql_host} -D {$db_name} < {$sql_file_to_process}";
+    shell_exec($command);
+}
+
 function replace_string_in_file($file, $from, $to) {
     file_put_contents($file, str_replace($from, $to, file_get_contents($file)));
 }
