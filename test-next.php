@@ -23,10 +23,8 @@ exec('git checkout queryluke/sirsi-usage-module-updates');
 echo "Coral source code updated\n";
 
 
-$db_name = $config['database']['name'];
-$mysql_host = $config['database']['host'];
 $sql_file_to_process = "$coral_path/usage/install/protected/3.0.2/001-000.sql";
-$command = "mysql -u{$update_user} -p{$update_pass} -h {$mysql_host} -D {$db_name} < {$sql_file_to_process}";
+$command = "mysql -u{$update_user} -p{$update_pass} -h 127.0.0.1 -D coral_usage_prod < {$sql_file_to_process}";
 shell_exec($command);
 
 // update version in footer
